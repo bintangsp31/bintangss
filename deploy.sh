@@ -1,9 +1,6 @@
-cat > deploy.sh << 'EOF'
-#!/bin/bash
-
 # Konfigurasi
 VPS_IP="192.168.1.7"
-VPS_USER="deploy"
+VPS_USER="vboxuser"
 APP_DIR="~/apps/my-cloud-app"
 REPO_URL="https://github.com/username/my-cloud-app.git"
 
@@ -11,14 +8,14 @@ echo "🚀 Starting deployment to VPS..."
 
 # 1. Push latest code ke GitHub
 echo "📤 Pushing code to GitHub..."
-git push origin main
+git push origin master
 
 # 2. SSH ke VPS dan pull latest code
 echo "🖥️  Connecting to VPS and pulling updates..."
 ssh $VPS_USER@$VPS_IP << 'REMOTE'
   cd ~/apps/my-cloud-app
   echo "⬇️  Pulling latest code..."
-  git pull origin main
+  git pull origin master
 
   echo "📦 Installing dependencies..."
   npm install --production
